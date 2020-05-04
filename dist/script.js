@@ -34,35 +34,54 @@ results.addEventListener('click', (e) => {
 
 // Search by song or artist
 async function searchSongs(term) {
-  const res = await fetch(`${apiURL}/suggest/${term}`);
-  const data = await res.json();
-
-  showData(data);
+  try {
+    const res = await fetch(`${apiURL}/suggest/${term}`);
+    const data = await res.json();
+    showData(data);
+  } catch (err) {
+    results.innerHTML =
+      '<p> An error occurred while trying to connect to the network. PLease check your connection.</p>';
+  }
 }
 
 // Get prev and next songs
 async function getMoreSongs(url) {
-  const res = await fetch(`https://cors-anywhere.herokuapp.com/${url}`);
-  const data = await res.json();
-
-  showData(data);
+  try {
+    const res = await fetch(`https://cors-anywhere.herokuapp.com/${url}`);
+    const data = await res.json();
+    showData(data);
+  } catch (err) {
+    results.innerHTML =
+      '<p> An error occurred while trying to connect to the network. PLease check your connection.</p>';
+  }
 }
 
 // Get lyrics for song
 async function getLyrics(artist, songTitle) {
-  const res = await fetch(`${apiURL}/v1/${artist}/${songTitle}`);
-  const data = await res.json();
+  try {
+    const res = await fetch(`${apiURL}/v1/${artist}/${songTitle}`);
+    const data = await res.json();
 
-  const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>');
+    const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>');
 
-  results.innerHTML = `<h2><strong>${artist}</strong> - ${songTitle}</h2>
+    results.innerHTML = `<h2><strong>${artist}</strong> - ${songTitle}</h2>
     <span>${lyrics}</span>`;
+  } catch (err) {
+    results.innerHTML =
+      '<p> An error occurred while trying to connect to the network. PLease check your connection.</p>';
+  }
 
   more.innerHTML = '';
 }
 
 // Show song and artist in DOM
 function showData(data) {
+  if (data.total === 0) {
+    results.innerHTML =
+      "<p> Sorry, couldn't find an artist or a song matching your search.</p>";
+    return;
+  }
+
   results.innerHTML = `
     <ul class="songs">
       ${data.data

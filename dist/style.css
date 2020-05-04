@@ -36,7 +36,7 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 100px 0;
+  padding: 100px 20px;
   position: relative;
 }
 
@@ -58,6 +58,11 @@ header h1 {
   margin: 0 0 30px;
 }
 
+header a {
+  color: white;
+  margin-bottom: 20px;
+}
+
 form {
   position: relative;
   width: 500px;
@@ -73,15 +78,16 @@ form input {
 }
 
 form button {
+  background-color: #8d56fd;
+  color: #fff;
+  border: 0;
+  border-radius: 50px;
+  font-size: 16px;
+  padding: 13px 30px;
+
   position: absolute;
   top: 2px;
   right: 2px;
-  background-color: #e056fd;
-  border: 0;
-  border-radius: 50px;
-  color: #fff;
-  font-size: 16px;
-  padding: 13px 30px;
 }
 
 .btn {
@@ -104,6 +110,10 @@ ul.songs li {
   margin: 10px 0;
 }
 
+.results-container {
+  width: 100%;
+  padding: 20px;
+}
 .container {
   margin: 30px auto;
   max-width: 100%;
